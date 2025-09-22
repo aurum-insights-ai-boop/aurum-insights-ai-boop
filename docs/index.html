@@ -1,140 +1,350 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Aurum Insights AI</title>
-    <meta name="description" content="Aurum Insights AI - Startup de analítica conversacional y orquestación de IA">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Aurum Insights AI — Conversational Analytics & Orchestration</title>
+    <meta name="description" content="Aurum Insights AI: analítica conversacional y orquestación de IA. Dashboard para capturar, analizar y mejorar interacciones humano-IA." />
+    <meta property="og:title" content="Aurum Insights AI" />
+    <meta property="og:description" content="Analítica conversacional, orquestación y métricas para sistemas IA. Únete al early access." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="assets/og-image.png" />
+    <meta name="theme-color" content="#FFE066" />
     <style>
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f3f4f6; color: #222; }
-        header { background: linear-gradient(90deg, #ffe066 0%, #ffd700 100%); padding: 2rem 1rem; text-align: center; }
-        header h1 { margin: 0; font-size: 2.5rem; color: #363636; }
-        nav { margin-top: 1rem; }
-        nav button { background: #fff8ea; border: 1px solid #ffd700; border-radius: 6px; padding: 0.4rem 1.2rem; margin: 0 0.3rem; font-size: 1rem; cursor: pointer; }
-        main { max-width: 680px; margin: 2rem auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 16px #0001; padding: 2rem; }
-        h2 { color: #c49b0b; }
-        .soon { color: #bbb; font-size: 0.98em;}
-        .founder { margin: 1.5em 0 0.7em 0; }
-        .socials a { margin-right: 1em; color: #c49b0b; text-decoration: none;}
-        @media (max-width: 700px) {
-            main { padding: 1rem; }
+        :root{
+            --bg:#0f1724; /* base dark used in default dark mode */
+            --card:#0b1220;
+            --muted:#9aa7b2;
+            --accent:#ffd700;
+            --accent-2:#ffdd57;
+            --glass: rgba(255,255,255,0.04);
+            --glass-2: rgba(255,255,255,0.02);
+            --text:#e6eef6;
+            --shadow: 0 8px 30px rgba(2,6,23,0.6);
+            --glass-border: rgba(255,255,255,0.04);
+            font-family: Inter, "Segoe UI", Roboto, system-ui, -apple-system, "Helvetica Neue", Arial;
+        }
+        html,body{height:100%;margin:0;background:linear-gradient(180deg,#071124 0%, #071827 45%, #071124 100%);color:var(--text);-webkit-font-smoothing:antialiased;}
+        .container{max-width:1100px;margin:0 auto;padding:40px 24px;}
+        header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:28px;}
+        .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit;}
+        .logo{
+            width:56px;height:56px;border-radius:10px;
+            background:linear-gradient(135deg,var(--accent),#ffc857);
+            box-shadow:0 6px 18px rgba(255,200,30,0.12), inset 0 -6px 18px rgba(255,255,255,0.06);
+            display:inline-flex;align-items:center;justify-content:center;font-weight:700;color:#111;
+            font-size:20px;
+        }
+        .brand h1{margin:0;font-size:1.05rem;letter-spacing:0.2px;}
+        .controls{display:flex;align-items:center;gap:10px;}
+        .btn, .icon-btn{background:transparent;border:1px solid var(--glass-border);padding:8px 12px;border-radius:10px;color:var(--text);cursor:pointer;backdrop-filter: blur(6px);}
+        .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#111;border:none;box-shadow:0 8px 30px rgba(255,208,40,0.12);}
+        .btn.small{padding:6px 10px;font-size:0.92rem;}
+        main .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-bottom:32px;}
+        @media (max-width:1000px){ main .hero{grid-template-columns:1fr;}}
+        .hero-left h2{margin:0;font-size:2.1rem;line-height:1.04;color:linear-gradient(90deg,#fff,#ffd700); }
+        .tagline{font-weight:700;font-size:2rem;margin-bottom:10px}
+        .sub{color:var(--muted);margin:14px 0 18px;max-width:70%;}
+        .features-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;}
+        .chip{background:var(--glass);padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,0.03);font-size:0.92rem;color:var(--text);}
+        .card{
+            background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+            border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,0.03);
+            box-shadow:var(--shadow);
+        }
+        /* Right column preview */
+        .preview{border-radius:12px;padding:18px;background:linear-gradient(180deg,#071226,#08132a);border:1px solid rgba(255,255,255,0.03);}
+        .mock{
+            height:420px;border-radius:10px;background:linear-gradient(180deg,#061022,#0a1324);display:flex;flex-direction:column;gap:12px;padding:14px;
+        }
+        .mock .top{height:38px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:8px;display:flex;align-items:center;padding:8px 12px;gap:10px;}
+        .mock .chart{flex:1;border-radius:8px;background:linear-gradient(90deg,#041021,#041225);display:flex;align-items:center;justify-content:center;color:var(--muted);}
+        .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
+        .stat{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:10px;border-radius:8px;text-align:center;}
+        .stat strong{display:block;font-size:1.05rem;color:var(--accent-2);}
+        /* sections */
+        section{margin:28px 0;}
+        .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+        @media (max-width:900px){.grid-3{grid-template-columns:1fr}}
+        .feature {padding:18px;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.02);}
+        .feature h3{margin:0 0 6px;color:var(--accent-2);}
+        .how{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap;}
+        .step{flex:1;min-width:220px;padding:16px;border-radius:12px;background:var(--card);border:1px solid rgba(255,255,255,0.02);}
+        footer{margin-top:40px;padding:22px 0;border-top:1px solid rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);}
+        .socials a{color:var(--muted);text-decoration:none;margin-right:12px;}
+        /* language pill + dark toggle */
+        .lang-pill{display:flex;gap:6px;align-items:center;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:999px;padding:6px;border:1px solid rgba(255,255,255,0.03);}
+        .lang-pill button{background:transparent;border:none;color:var(--text);cursor:pointer;padding:6px 8px;border-radius:8px;}
+        .lang-pill button.active{background:rgba(255,255,255,0.02);}
+        /* animations */
+        @keyframes floaty {0%{transform:translateY(0)}50%{transform:translateY(-6px)}100%{transform:translateY(0)}}
+        .logo{animation:floaty 4s ease-in-out infinite;}
+        /* small helpers */
+        .muted{color:var(--muted);font-size:0.95rem;}
+        .kpi{display:flex;flex-direction:column;gap:6px}
+        .pill{display:inline-block;padding:6px 10px;background:rgba(255,255,255,0.02);border-radius:999px;font-size:0.9rem;border:1px solid rgba(255,255,255,0.03)}
+        /* dark/light toggle (simple inversion) */
+        .light body, .light :root{--bg:#f7f7fb;--card:#ffffff;--muted:#536270;--accent:#ffd700;--accent-2:#ffb703;--glass:rgba(0,0,0,0.02);--glass-2:rgba(0,0,0,0.01);--text:#0b1220;--shadow: 0 10px 40px rgba(2,6,23,0.06);--glass-border:rgba(0,0,0,0.04);}
+        /* responsive tweaks */
+        @media (max-width:600px){
+            header{flex-direction:column;align-items:flex-start;padding-bottom:6px}
+            .controls{width:100%;justify-content:space-between}
+            .sub{max-width:100%}
         }
     </style>
-    <script>
-        // Simple language switcher
-        function showLang(lang) {
-            document.querySelectorAll('.lang').forEach(div => div.style.display = 'none');
-            document.getElementById('lang-' + lang).style.display = 'block';
-        }
-        window.onload = function() { showLang('es'); }
-    </script>
 </head>
 <body>
-<header>
-    <h1>Aurum Insights AI</h1>
-    <nav>
-        <button onclick="showLang('es')">🇪🇸 Español</button>
-        <button onclick="showLang('en')">🇬🇧 English</button>
-        <button onclick="showLang('pt')">🇧🇷 Português</button>
-    </nav>
-</header>
-<main>
-    <!-- Español -->
-    <div class="lang" id="lang-es">
-        <h2>¿Quiénes somos?</h2>
-        <p>
-            <strong>Aurum Insights AI</strong> es una StartUp dedicada a revolucionar la relación entre personas y sistemas inteligentes. Desarrollamos soluciones de analítica conversacional y orquestación de flujos de trabajo mediante inteligencia artificial, LLMs y tecnologías RAG avanzadas.
-        </p>
-        <h2>Misión</h2>
-        <p>
-            Empoderar empresas y equipos mediante IA, transformando interacciones en métricas y conocimiento accionable.
-        </p>
-        <h2>Visión</h2>
-        <p>
-            Ser el referente latinoamericano en analítica conversacional inteligente, liderando la transformación digital entre humanos y la IA.
-        </p>
-        <h2>Producto inicial</h2>
-        <p>
-            Estamos desarrollando un <b>dashboard inteligente</b> para capturar, analizar y visualizar datos de interacciones humano-IA (chatbots, LLMs, sistemas multiagente).
-            <br><b>Características:</b><br>
-            - Métricas y visualizaciones en tiempo real <br>
-            - Análisis de calidad de respuestas <br>
-            - Flexible y pensado para futuras integraciones
-        </p>
-        <h2 class="founder">Fundador y CEO</h2>
-        <p>
-            <a href="https://www.linkedin.com/in/alejandromero/" target="_blank">Alejandro Merino</a>
-            <br><span style="font-size:0.96em;">Especialista en IA, automatización y orquestación de flujos de trabajo.</span>
-        </p>
-        <div class="socials">
-            <span class="soon">Próximamente: sitio web, Twitter, LinkedIn corporativo y newsletter.</span>
+<div class="container" id="app">
+    <header>
+        <a class="brand" href="#">
+            <div class="logo" aria-hidden="true">AI</div>
+            <div>
+                <h1>Aurum Insights AI</h1>
+                <div class="muted" style="font-size:0.88rem">Conversational analytics · Workflow orchestration</div>
+            </div>
+        </a>
+
+        <div class="controls" role="navigation" aria-label="controls">
+            <div class="lang-pill" role="tablist" aria-label="Language selector">
+                <button id="btn-es" data-lang="es">🇪🇸 ES</button>
+                <button id="btn-en" data-lang="en">🇬🇧 EN</button>
+                <button id="btn-pt" data-lang="pt">🇧🇷 PT</button>
+            </div>
+            <button class="btn small" id="theme-toggle" title="Toggle theme">🌗</button>
+            <button class="btn primary small" id="early" title="Join early access">Join early access</button>
         </div>
-        <p class="soon" style="margin-top:2em;">“Transformando datos en visión, y visión en impacto.”</p>
-    </div>
-    <!-- English -->
-    <div class="lang" id="lang-en" style="display:none;">
-        <h2>Who are we?</h2>
-        <p>
-            <strong>Aurum Insights AI</strong> is a startup dedicated to revolutionizing how people and intelligent systems interact. We develop conversational analytics and workflow orchestration solutions using artificial intelligence, LLMs, and advanced RAG technologies.
-        </p>
-        <h2>Mission</h2>
-        <p>
-            Empower companies and teams with AI, turning interactions into actionable insights and metrics.
-        </p>
-        <h2>Vision</h2>
-        <p>
-            To become the Latin American leader in intelligent conversational analytics, driving the digital transformation between humans and AI.
-        </p>
-        <h2>Initial product</h2>
-        <p>
-            We are building a <b>smart dashboard</b> to capture, analyze, and visualize human-AI interaction data (chatbots, LLMs, multi-agent systems).
-            <br><b>Main features:</b><br>
-            - Real-time metrics and visualizations<br>
-            - Response quality analytics<br>
-            - Flexible for future integrations
-        </p>
-        <h2 class="founder">Founder & CEO</h2>
-        <p>
-            <a href="https://www.linkedin.com/in/alejandromero/" target="_blank">Alejandro Merino</a>
-            <br><span style="font-size:0.96em;">Specialist in AI, automation, and workflow orchestration.</span>
-        </p>
-        <div class="socials">
-            <span class="soon">Coming soon: official website, Twitter, company LinkedIn, and newsletter.</span>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-left">
+                <div class="card">
+                    <div id="content-es" class="lang-content" data-lang="es">
+                        <div class="tagline">Donde los datos conversan, la inteligencia florece.</div>
+                        <p class="sub">Aurum Insights AI transforma interacciones humano-IA en métricas accionables: diagnóstico, calidad de respuesta, y orquestación de flujos para mejorar experiencias y resultados.</p>
+                        <div class="features-row">
+                            <span class="chip">Realtime capture</span>
+                            <span class="chip">Response quality</span>
+                            <span class="chip">Multi-agent traces</span>
+                        </div>
+                        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+                            <button class="btn primary" onclick="joinWaitlist('es')">Unirme al early access</button>
+                            <a class="btn" href="mailto:contacto@auruminsights.ai?subject=Interés%20Aurum%20Insights%20AI" target="_blank">Contacto</a>
+                        </div>
+                    </div>
+
+                    <div id="content-en" class="lang-content" data-lang="en" style="display:none">
+                        <div class="tagline">Where conversational data becomes strategic intelligence.</div>
+                        <p class="sub">Aurum Insights AI turns human-AI interactions into actionable metrics: diagnostics, response-quality scoring, and workflow orchestration to improve experiences and results.</p>
+                        <div class="features-row">
+                            <span class="chip">Realtime capture</span>
+                            <span class="chip">Response quality</span>
+                            <span class="chip">Multi-agent traces</span>
+                        </div>
+                        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+                            <button class="btn primary" onclick="joinWaitlist('en')">Join the early access</button>
+                            <a class="btn" href="mailto:contacto@auruminsights.ai?subject=Aurum%20Insights%20AI%20Interest" target="_blank">Contact</a>
+                        </div>
+                    </div>
+
+                    <div id="content-pt" class="lang-content" data-lang="pt" style="display:none">
+                        <div class="tagline">Onde dados conversam, nasce inteligência.</div>
+                        <p class="sub">Aurum Insights AI transforma interações humano‑IA em métricas acionáveis: diagnóstico, qualidade de resposta e orquestração de fluxos para otimizar experiências.</p>
+                        <div class="features-row">
+                            <span class="chip">Captura em tempo real</span>
+                            <span class="chip">Qualidade de resposta</span>
+                            <span class="chip">Rastros multiagente</span>
+                        </div>
+                        <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+                            <button class="btn primary" onclick="joinWaitlist('pt')">Entrar no early access</button>
+                            <a class="btn" href="mailto:contacto@auruminsights.ai?subject=Interesse%20Aurum%20Insights%20AI" target="_blank">Contato</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <aside class="preview card">
+                <div class="mock" aria-hidden="true">
+                    <div class="top">
+                        <div style="width:12px;height:12px;border-radius:50%;background:#ff6b6b"></div>
+                        <div style="width:12px;height:12px;border-radius:50%;background:#ffd700"></div>
+                        <div style="width:12px;height:12px;border-radius:50%;background:#8ef"></div>
+                        <div style="margin-left:auto;color:var(--muted);font-size:0.92rem">Aurum Insights · Live</div>
+                    </div>
+                    <div class="chart card" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                        <svg width="240" height="120" viewBox="0 0 240 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="240" height="120" rx="8" fill="#071226"></rect>
+                            <path d="M10 100 L40 70 L80 90 L120 50 L160 70 L200 30 L230 60" stroke="#ffd700" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                            <path d="M10 90 L40 60 L80 75 L120 40 L160 60 L200 20 L230 45" stroke="#8ef" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.9"/>
+                        </svg>
+                        <div class="muted" style="margin-top:8px">Live conversational metrics • demo</div>
+                    </div>
+
+                    <div class="stat-grid">
+                        <div class="stat"><div class="muted">Avg. Response Time</div><strong>320ms</strong></div>
+                        <div class="stat"><div class="muted">Quality Score</div><strong>87%</strong></div>
+                        <div class="stat"><div class="muted">Sessions / min</div><strong>12</strong></div>
+                    </div>
+                </div>
+            </aside>
+        </section>
+
+        <section aria-labelledby="features" class="card">
+            <h2 id="features">Qué hacemos / What we do</h2>
+            <div class="grid-3" style="margin-top:12px;">
+                <div class="feature">
+                    <h3>Captura & Trazabilidad</h3>
+                    <p class="muted">Evento a evento, almacenamos la conversación completa y el rastro entre agentes para auditoría, debugging y trazabilidad en producción.</p>
+                </div>
+                <div class="feature">
+                    <h3>Evaluación de respuestas</h3>
+                    <p class="muted">Scoring automático de calidad, detección de incoherencias y resumen de fallos para mejorar modelos y prompts.</p>
+                </div>
+                <div class="feature">
+                    <h3>Orquestación y métricas</h3>
+                    <p class="muted">Pipeline de orquestación para encolar, reintentar y enrutar mensajes entre agentes y modelos con métricas centralizadas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="how card" aria-labelledby="how">
+            <div style="flex:1">
+                <h2 id="how">Cómo funciona / How it works</h2>
+                <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+                    <div class="step">
+                        <strong>1. Integración</strong>
+                        <div class="muted">SDKs y webhooks para capturar streams de conversación desde chatbots, LLMs y sistemas multi-agente.</div>
+                    </div>
+                    <div class="step">
+                        <strong>2. Procesamiento</strong>
+                        <div class="muted">Normalización, enriquecimiento (RAG context), y scoring de respuestas en pipelines escalables.</div>
+                    </div>
+                    <div class="step">
+                        <strong>3. Visualiza & Actúa</strong>
+                        <div class="muted">Dashboard con KPIs, trazas por sesión, alertas y acciones para entrenar modelos y mejorar flujos.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width:320px">
+                <h3 style="margin-top:0">Por qué ahora</h3>
+                <p class="muted">La adopción de LLMs y agentes aumenta la complejidad operacional. Las empresas necesitan observabilidad conversacional para gobernar, optimizar y monetizar experiencias IA.</p>
+                <div style="margin-top:12px">
+                    <div class="pill">Ideal para: Fintech · eCommerce · Soporte · Healthcare</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Roadmap (próximos hitos)</h2>
+            <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+                <div class="card" style="flex:1;min-width:220px;">
+                    <strong>Q4 2025</strong>
+                    <div class="muted">MVP: captura en tiempo real, panel de métricas y scoring básico.</div>
+                </div>
+                <div class="card" style="flex:1;min-width:220px;">
+                    <strong>Q1 2026</strong>
+                    <div class="muted">Integraciones con proveedores de LLM, alertas y workflows de orquestación.</div>
+                </div>
+                <div class="card" style="flex:1;min-width:220px;">
+                    <strong>Mid 2026</strong>
+                    <div class="muted">Marketplace de conectores, analítica avanzada y SSO/enterprises features.</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card" aria-labelledby="founder">
+            <h2 id="founder">Fundador</h2>
+            <div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap">
+                <div style="width:72px;height:72px;border-radius:12px;background:linear-gradient(135deg,#ffd700,#ffb703);display:flex;align-items:center;justify-content:center;color:#111;font-weight:700">AR</div>
+                <div>
+                    <div style="font-weight:700">Alejandro Romero</div>
+                    <div class="muted">Especialista en IA, automatización y orquestación de flujos de trabajo · <a href="https://www.linkedin.com/in/alejandromero" target="_blank" style="color:var(--accent-2);text-decoration:none">LinkedIn</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2>Contact & Early access</h2>
+            <p class="muted">Un proyecto inicialmente unipersonal pero con visión de crecer en equipo. Si quieres probar el MVP, contáctanos o únete al early access.</p>
+            <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap;">
+                <button class="btn primary" onclick="joinWaitlist('es')">Unirme al early access</button>
+                <a class="btn" href="mailto:contacto@auruminsights.ai?subject=Early%20Access%20Aurum%20Insights" target="_blank">Enviar email</a>
+                <a class="btn" href="https://www.linkedin.com/in/alejandromero" target="_blank">LinkedIn</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <div class="muted">© 2025 Aurum Insights AI · Transformando datos en visión</div>
+        <div>
+            <a class="socials" href="#" style="margin-right:14px" aria-label="Twitter">Twitter</a>
+            <a class="socials" href="#" style="margin-right:14px" aria-label="LinkedIn">LinkedIn</a>
+            <a class="socials" href="#" aria-label="GitHub">GitHub</a>
         </div>
-        <p class="soon" style="margin-top:2em;">“Turning data into vision, and vision into impact.”</p>
-    </div>
-    <!-- Português -->
-    <div class="lang" id="lang-pt" style="display:none;">
-        <h2>Quem somos?</h2>
-        <p>
-            <strong>Aurum Insights AI</strong> é uma startup dedicada a revolucionar a relação entre pessoas e sistemas inteligentes. Desenvolvemos soluções de análise conversacional e orquestração de fluxos de trabalho com IA, LLMs e tecnologias RAG avançadas.
-        </p>
-        <h2>Missão</h2>
-        <p>
-            Capacitar empresas e equipes com IA, transformando interações em métricas e conhecimento acionável.
-        </p>
-        <h2>Visão</h2>
-        <p>
-            Ser referência latino-americana em análise conversacional inteligente, liderando a transformação digital entre humanos e IA.
-        </p>
-        <h2>Produto inicial</h2>
-        <p>
-            Estamos desenvolvendo um <b>dashboard inteligente</b> para capturar, analisar e visualizar dados de interações humano-IA (chatbots, LLMs, sistemas multiagentes).
-            <br><b>Recursos principais:</b><br>
-            - Métricas e visualizações em tempo real <br>
-            - Análise da qualidade das respostas <br>
-            - Flexível para futuras integrações
-        </p>
-        <h2 class="founder">Fundador e CEO</h2>
-        <p>
-            <a href="https://www.linkedin.com/in/alejandromero/" target="_blank">Alejandro Romero</a>
-            <br><span style="font-size:0.96em;">Especialista em IA, automação e orquestração de fluxos de trabalho.</span>
-        </p>
-        <div class="socials">
-            <span class="soon">Em breve: site oficial, Twitter, LinkedIn corporativo e newsletter.</span>
-        </div>
-        <p class="soon" style="margin-top:2em;">“Transformando dados em visão, e visão em impacto.”</p>
-    </div>
-</main>
+    </footer>
+</div>
+
+<script>
+    // Language + theme persistence and UI wiring
+    (function(){
+        const supported = ['es','en','pt'];
+        const defaultLang = navigator.language && navigator.language.startsWith('pt') ? 'pt' :
+            navigator.language && navigator.language.startsWith('en') ? 'en' : 'es';
+
+        function setLang(lang){
+            if(!supported.includes(lang)) lang = 'es';
+            document.querySelectorAll('.lang-content').forEach(el=>{
+                el.style.display = el.dataset.lang === lang ? 'block' : 'none';
+            });
+            document.querySelectorAll('.lang-pill button').forEach(btn=>{
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            localStorage.setItem('aurum:lang', lang);
+        }
+
+        function setTheme(theme){
+            if(theme === 'light'){
+                document.documentElement.classList.add('light');
+            } else {
+                document.documentElement.classList.remove('light');
+            }
+            localStorage.setItem('aurum:theme', theme);
+        }
+
+        // wire language buttons
+        document.querySelectorAll('.lang-pill button').forEach(btn=>{
+            btn.addEventListener('click', ()=> setLang(btn.dataset.lang));
+        });
+
+        // theme toggle
+        const themeBtn = document.getElementById('theme-toggle');
+        themeBtn.addEventListener('click', ()=>{
+            const current = localStorage.getItem('aurum:theme') === 'light' ? 'light' : 'dark';
+            setTheme(current === 'light' ? 'dark' : 'light');
+        });
+
+        // early access CTA
+        window.joinWaitlist = function(lang){
+            const subject = {
+                es: 'Interés en early access - Aurum Insights AI',
+                en: 'Early access interest - Aurum Insights AI',
+                pt: 'Interesse em early access - Aurum Insights AI'
+            }[lang] || 'Early access interest - Aurum Insights AI';
+            const mail = 'contacto@auruminsights.ai';
+            window.location.href = `mailto:${mail}?subject=${encodeURIComponent(subject)}`;
+        };
+
+        // init from storage or default
+        const storedLang = localStorage.getItem('aurum:lang') || defaultLang;
+        setLang(storedLang);
+        const storedTheme = localStorage.getItem('aurum:theme') || (window.matchMedia && window.matchMedia('(prefers-color-scheme:light)').matches ? 'light' : 'dark');
+        setTheme(storedTheme);
+        // early button hook
+        document.getElementById('early').addEventListener('click', ()=> joinWaitlist(storedLang));
+    })();
+</script>
 </body>
 </html>
