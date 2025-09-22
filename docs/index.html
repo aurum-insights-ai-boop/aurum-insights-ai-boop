@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Aurum Insights AI</title>
+    <meta name="description" content="Aurum Insights AI - Startup de analítica conversacional y orquestación de IA">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background: #f3f4f6; color: #222; }
+        header { background: linear-gradient(90deg, #ffe066 0%, #ffd700 100%); padding: 2rem 1rem; text-align: center; }
+        header h1 { margin: 0; font-size: 2.5rem; color: #363636; }
+        nav { margin-top: 1rem; }
+        nav button { background: #fff8ea; border: 1px solid #ffd700; border-radius: 6px; padding: 0.4rem 1.2rem; margin: 0 0.3rem; font-size: 1rem; cursor: pointer; }
+        main { max-width: 680px; margin: 2rem auto; background: #fff; border-radius: 12px; box-shadow: 0 4px 16px #0001; padding: 2rem; }
+        h2 { color: #c49b0b; }
+        .soon { color: #bbb; font-size: 0.98em;}
+        .founder { margin: 1.5em 0 0.7em 0; }
+        .socials a { margin-right: 1em; color: #c49b0b; text-decoration: none;}
+        @media (max-width: 700px) {
+            main { padding: 1rem; }
+        }
+    </style>
+    <script>
+        // Simple language switcher
+        function showLang(lang) {
+            document.querySelectorAll('.lang').forEach(div => div.style.display = 'none');
+            document.getElementById('lang-' + lang).style.display = 'block';
+        }
+        window.onload = function() { showLang('es'); }
+    </script>
+</head>
+<body>
+<header>
+    <h1>Aurum Insights AI</h1>
+    <nav>
+        <button onclick="showLang('es')">🇪🇸 Español</button>
+        <button onclick="showLang('en')">🇬🇧 English</button>
+        <button onclick="showLang('pt')">🇧🇷 Português</button>
+    </nav>
+</header>
+<main>
+    <!-- Español -->
+    <div class="lang" id="lang-es">
+        <h2>¿Quiénes somos?</h2>
+        <p>
+            <strong>Aurum Insights AI</strong> es una StartUp dedicada a revolucionar la relación entre personas y sistemas inteligentes. Desarrollamos soluciones de analítica conversacional y orquestación de flujos de trabajo mediante inteligencia artificial, LLMs y tecnologías RAG avanzadas.
+        </p>
+        <h2>Misión</h2>
+        <p>
+            Empoderar empresas y equipos mediante IA, transformando interacciones en métricas y conocimiento accionable.
+        </p>
+        <h2>Visión</h2>
+        <p>
+            Ser el referente latinoamericano en analítica conversacional inteligente, liderando la transformación digital entre humanos y la IA.
+        </p>
+        <h2>Producto inicial</h2>
+        <p>
+            Estamos desarrollando un <b>dashboard inteligente</b> para capturar, analizar y visualizar datos de interacciones humano-IA (chatbots, LLMs, sistemas multiagente).
+            <br><b>Características:</b><br>
+            - Métricas y visualizaciones en tiempo real <br>
+            - Análisis de calidad de respuestas <br>
+            - Flexible y pensado para futuras integraciones
+        </p>
+        <h2 class="founder">Fundador y CEO</h2>
+        <p>
+            <a href="https://www.linkedin.com/in/alejandromero/" target="_blank">Alejandro Merino</a>
+            <br><span style="font-size:0.96em;">Especialista en IA, automatización y orquestación de flujos de trabajo.</span>
+        </p>
+        <div class="socials">
+            <span class="soon">Próximamente: sitio web, Twitter, LinkedIn corporativo y newsletter.</span>
+        </div>
+        <p class="soon" style="margin-top:2em;">“Transformando datos en visión, y visión en impacto.”</p>
+    </div>
+    <!-- English -->
+    <div class="lang" id="lang-en" style="display:none;">
+        <h2>Who are we?</h2>
+        <p>
+            <strong>Aurum Insights AI</strong> is a startup dedicated to revolutionizing how people and intelligent systems interact. We develop conversational analytics and workflow orchestration solutions using artificial intelligence, LLMs, and advanced RAG technologies.
+        </p>
+        <h2>Mission</h2>
+        <p>
+            Empower companies and teams with AI, turning interactions into actionable insights and metrics.
+        </p>
+        <h2>Vision</h2>
+        <p>
+            To become the Latin American leader in intelligent conversational analytics, driving the digital transformation between humans and AI.
+        </p>
+        <h2>Initial product</h2>
+        <p>
+            We are building a <b>smart dashboard</b> to capture, analyze, and visualize human-AI interaction data (chatbots, LLMs, multi-agent systems).
+            <br><b>Main features:</b><br>
+            - Real-time metrics and visualizations<br>
+            - Response quality analytics<br>
+            - Flexible for future integrations
+        </p>
+        <h2 class="founder">Founder & CEO</h2>
+        <p>
+            <a href="https://www.linkedin.com/in/alejandromero/" target="_blank">Alejandro Merino</a>
+            <br><span style="font-size:0.96em;">Specialist in AI, automation, and workflow orchestration.</span>
+        </p>
+        <div class="socials">
+            <span class="soon">Coming soon: official website, Twitter, company LinkedIn, and newsletter.</span>
+        </div>
+        <p class="soon" style="margin-top:2em;">“Turning data into vision, and vision into impact.”</p>
+    </div>
+    <!-- Português -->
+    <div class="lang" id="lang-pt" style="display:none;">
+        <h2>Quem somos?</h2>
+        <p>
+            <strong>Aurum Insights AI</strong> é uma startup dedicada a revolucionar a relação entre pessoas e sistemas inteligentes. Desenvolvemos soluções de análise conversacional e orquestração de fluxos de trabalho com IA, LLMs e tecnologias RAG avançadas.
+        </p>
+        <h2>Missão</h2>
+        <p>
+            Capacitar empresas e equipes com IA, transformando interações em métricas e conhecimento acionável.
+        </p>
+        <h2>Visão</h2>
+        <p>
+            Ser referência latino-americana em análise conversacional inteligente, liderando a transformação digital entre humanos e IA.
+        </p>
+        <h2>Produto inicial</h2>
+        <p>
+            Estamos desenvolvendo um <b>dashboard inteligente</b> para capturar, analisar e visualizar dados de interações humano-IA (chatbots, LLMs, sistemas multiagentes).
+            <br><b>Recursos principais:</b><br>
+            - Métricas e visualizações em tempo real <br>
+            - Análise da qualidade das respostas <br>
+            - Flexível para futuras integrações
+        </p>
+        <h2 class="founder">Fundador e CEO</h2>
+        <p>
+            <a href="https://www.linkedin.com/in/alejandromero/" target="_blank">Alejandro Romero</a>
+            <br><span style="font-size:0.96em;">Especialista em IA, automação e orquestração de fluxos de trabalho.</span>
+        </p>
+        <div class="socials">
+            <span class="soon">Em breve: site oficial, Twitter, LinkedIn corporativo e newsletter.</span>
+        </div>
+        <p class="soon" style="margin-top:2em;">“Transformando dados em visão, e visão em impacto.”</p>
+    </div>
+</main>
+</body>
+</html>
